@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bread Social - Ana Sayfa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">🍞 BREAD SOCIAL</span>
+            </div>
+            <div class="nav-search">
+                <input type="text" placeholder="Ara..." class="search-input">
+            </div>
+            <div class="nav-actions">
+                <button class="nav-btn">Bildirimler</button>
+                <button class="nav-btn">Profil</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-section="home">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-label">Ana Sayfa</span>
+                </a>
+                <a href="#" class="nav-item" data-section="explore">
+                    <span class="nav-icon">🔍</span>
+                    <span class="nav-label">Keşfet</span>
+                </a>
+                <a href="#" class="nav-item" data-section="messages">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-label">Mesajlar</span>
+                </a>
+                <a href="#" class="nav-item" data-section="profile">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">Profil</span>
+                </a>
+            </nav>
+            <button class="post-btn">+ YENİ POST</button>
+        </aside>
+
+        <!-- Home Feed Section -->
+        <section class="feed content-section active" id="home-section">
+            <!-- Post Creation Box -->
+            <div class="post-create">
+                <div class="post-create-header">Ne düşünüyorsun?</div>
+                <textarea class="post-create-input" placeholder="Birşeyler yaz..."></textarea>
+                <div class="post-create-actions">
+                    <button class="post-create-btn">PAYLAŞ</button>
+                </div>
+            </div>
+
+            <!-- Feed Posts -->
+            <div class="posts">
+                <!-- Post 1 -->
+                <article class="post">
+                    <div class="post-header">
+                        <div class="post-avatar">🧑</div>
+                        <div class="post-author">
+                            <div class="post-name">Ahmet Yılmaz</div>
+                            <div class="post-handle">@ahmetyilmaz · 2s</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Gruvbox teması gerçekten harika! Bu retro görünümü çok sevdim 🎨
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn"><span class="icon icon-comment">💬</span> 12</button>
+                        <button class="action-btn"><span class="icon icon-repost">🔄</span> 5</button>
+                        <button class="action-btn"><span class="icon icon-like">❤️</span> 23</button>
+                        <button class="action-btn"><span class="icon icon-share">📤</span></button>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="post">
+                    <div class="post-header">
+                        <div class="post-avatar">👩</div>
+                        <div class="post-author">
+                            <div class="post-name">Zeynep Kara</div>
+                            <div class="post-handle">@zeynepkara · 5d</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Yeni projeme başladım! Node.js ve Turso ile modern bir sosyal medya platformu yapıyorum. Heyecanlıyım! 🚀
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn">💬 8</button>
+                        <button class="action-btn">🔄 15</button>
+                        <button class="action-btn">❤️ 45</button>
+                        <button class="action-btn">📤</button>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="post">
+                    <div class="post-header">
+                        <div class="post-avatar">🧔</div>
+                        <div class="post-author">
+                            <div class="post-name">Mehmet Demir</div>
+                            <div class="post-handle">@mehmetdemir · 1sa</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Pixel art'ın geri dönüşü çok güzel. Retro estetik modern tasarımla buluşunca ortaya harika şeyler çıkıyor 🎮✨
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn">💬 3</button>
+                        <button class="action-btn">🔄 7</button>
+                        <button class="action-btn">❤️ 18</button>
+                        <button class="action-btn">📤</button>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="post">
+                    <div class="post-header">
+                        <div class="post-avatar">👨</div>
+                        <div class="post-author">
+                            <div class="post-name">Can Özdemir</div>
+                            <div class="post-handle">@canozdemir · 3sa</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Monospace fontlar &gt;&gt;&gt; diğer fontlar
+                        <br><br>
+                        Change my mind 😤
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn">💬 24</button>
+                        <button class="action-btn">🔄 11</button>
+                        <button class="action-btn">❤️ 67</button>
+                        <button class="action-btn">📤</button>
+                    </div>
+                </article>
+
+                <!-- Post 5 -->
+                <article class="post">
+                    <div class="post-header">
+                        <div class="post-avatar">👧</div>
+                        <div class="post-author">
+                            <div class="post-name">Ayşe Yıldız</div>
+                            <div class="post-handle">@ayseyildiz · 6sa</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        CSS Grid + Flexbox = ❤️
+                        <br>
+                        Modern layout sistemleri ile çalışmak gerçekten keyifli
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn">💬 9</button>
+                        <button class="action-btn">🔄 4</button>
+                        <button class="action-btn">❤️ 31</button>
+                        <button class="action-btn">📤</button>
+                    </div>
+                </article>
+
+                <!-- Post 6 -->
+                <article class="post">
+                    <div class="post-header">
+                        <div class="post-avatar">🧑</div>
+                        <div class="post-author">
+                            <div class="post-name">Emre Şahin</div>
+                            <div class="post-handle">@emresahin · 12sa</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Terminal estetiği web tasarımında neden bu kadar popüler? Çünkü developer'ların hepsi terminal sevdalısı 💻🖤
+                    </div>
+                    <div class="post-actions">
+                        <button class="action-btn">💬 16</button>
+                        <button class="action-btn">🔄 28</button>
+                        <button class="action-btn">❤️ 89</button>
+                        <button class="action-btn">📤</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Explore Section -->
+        <section class="feed content-section" id="explore-section">
+            <!-- Explore Header -->
+            <div class="explore-header">
+                <h2 class="section-title">KEŞFET</h2>
+            </div>
+
+            <!-- Trending Topics -->
+            <div class="explore-card">
+                <div class="explore-card-header">📈 Trend Konular</div>
+                <div class="trending-list">
+                    <div class="trending-item">
+                        <div class="trending-rank">#1</div>
+                        <div class="trending-info">
+                            <div class="trending-topic">#GruvboxTheme</div>
+                            <div class="trending-category">Teknoloji</div>
+                            <div class="trending-count">12.4K posts</div>
+                        </div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-rank">#2</div>
+                        <div class="trending-info">
+                            <div class="trending-topic">#RetroDesign</div>
+                            <div class="trending-category">Tasarım</div>
+                            <div class="trending-count">8.9K posts</div>
+                        </div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-rank">#3</div>
+                        <div class="trending-info">
+                            <div class="trending-topic">#PixelArt</div>
+                            <div class="trending-category">Sanat</div>
+                            <div class="trending-count">15.2K posts</div>
+                        </div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-rank">#4</div>
+                        <div class="trending-info">
+                            <div class="trending-topic">#8BitMusic</div>
+                            <div class="trending-category">Müzik</div>
+                            <div class="trending-count">6.7K posts</div>
+                        </div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-rank">#5</div>
+                        <div class="trending-info">
+                            <div class="trending-topic">#WebDev</div>
+                            <div class="trending-category">Yazılım</div>
+                            <div class="trending-count">21.3K posts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Users -->
+            <div class="explore-card">
+                <div class="explore-card-header">🌟 Popüler Kullanıcılar</div>
+                <div class="popular-users">
+                    <div class="popular-user">
+                        <div class="user-avatar">🎨</div>
+                        <div class="user-info">
+                            <div class="user-name">Pixel Master</div>
+                            <div class="user-handle">@pixelmaster</div>
+                            <div class="user-bio">8-bit art creator | Retro enthusiast</div>
+                        </div>
+                        <button class="follow-btn">Takip Et</button>
+                    </div>
+                    <div class="popular-user">
+                        <div class="user-avatar">💻</div>
+                        <div class="user-info">
+                            <div class="user-name">Dev Wizard</div>
+                            <div class="user-handle">@devwizard</div>
+                            <div class="user-bio">Full-stack developer | Open source lover</div>
+                        </div>
+                        <button class="follow-btn">Takip Et</button>
+                    </div>
+                    <div class="popular-user">
+                        <div class="user-avatar">🎮</div>
+                        <div class="user-info">
+                            <div class="user-name">Retro Gamer</div>
+                            <div class="user-handle">@retrogamer</div>
+                            <div class="user-bio">Classic games & pixel art collector</div>
+                        </div>
+                        <button class="follow-btn">Takip Et</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="explore-card">
+                <div class="explore-card-header">🗂️ Kategoriler</div>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">💻</div>
+                        <div class="category-name">Teknoloji</div>
+                        <div class="category-count">1.2M posts</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🎨</div>
+                        <div class="category-name">Tasarım</div>
+                        <div class="category-count">890K posts</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🎮</div>
+                        <div class="category-name">Oyun</div>
+                        <div class="category-count">2.1M posts</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">🎵</div>
+                        <div class="category-name">Müzik</div>
+                        <div class="category-count">650K posts</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">📚</div>
+                        <div class="category-name">Eğitim</div>
+                        <div class="category-count">420K posts</div>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-icon">✨</div>
+                        <div class="category-name">Yaratıcılık</div>
+                        <div class="category-count">780K posts</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section class="feed content-section" id="profile-section">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-cover"></div>
+                <div class="profile-info">
+                    <div class="profile-avatar-large">🧑</div>
+                    <div class="profile-meta">
+                        <div class="profile-name-section">
+                            <h1 class="profile-display-name">Ahmet Yılmaz</h1>
+                            <div class="profile-username">@ahmetyilmaz</div>
+                        </div>
+                        <button class="profile-edit-btn">Profili Düzenle</button>
+                    </div>
+                </div>
+                <div class="profile-bio">
+                    <p>Gruvbox severim 🎨 | Retro tasarım tutkunu | Frontend Developer | Pixel art meraklısı</p>
+                </div>
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <span class="stat-value">234</span>
+                        <span class="stat-label">Gönderi</span>
+                    </div>
+                    <div class="profile-stat">
+                        <span class="stat-value">1.2K</span>
+                        <span class="stat-label">Takipçi</span>
+                    </div>
+                    <div class="profile-stat">
+                        <span class="stat-value">567</span>
+                        <span class="stat-label">Takip</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Tabs -->
+            <div class="profile-tabs">
+                <button class="profile-tab active" data-tab="posts">📝 Gönderiler</button>
+                <button class="profile-tab" data-tab="replies">💬 Yanıtlar</button>
+                <button class="profile-tab" data-tab="media">🖼️ Medya</button>
+                <button class="profile-tab" data-tab="likes">❤️ Beğeniler</button>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="profile-content">
+                <!-- Posts Tab -->
+                <div class="profile-tab-content active" id="posts-tab">
+                    <article class="post">
+                        <div class="post-header">
+                            <div class="post-avatar">🧑</div>
+                            <div class="post-author">
+                                <div class="post-name">Ahmet Yılmaz</div>
+                                <div class="post-handle">@ahmetyilmaz · 2s</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Gruvbox teması gerçekten harika! Bu retro görünümü çok sevdim 🎨
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn"><span class="icon icon-comment">💬</span> 12</button>
+                            <button class="action-btn"><span class="icon icon-repost">🔄</span> 5</button>
+                            <button class="action-btn"><span class="icon icon-like">❤️</span> 23</button>
+                            <button class="action-btn"><span class="icon icon-share">📤</span></button>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <div class="post-avatar">🧑</div>
+                            <div class="post-author">
+                                <div class="post-name">Ahmet Yılmaz</div>
+                                <div class="post-handle">@ahmetyilmaz · 1s</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Yeni pixel art projesi üzerinde çalışıyorum. Retro oyun karakterleri yapıyorum 🎮✨
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn"><span class="icon icon-comment">💬</span> 8</button>
+                            <button class="action-btn"><span class="icon icon-repost">🔄</span> 3</button>
+                            <button class="action-btn"><span class="icon icon-like">❤️</span> 45</button>
+                            <button class="action-btn"><span class="icon icon-share">📤</span></button>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <div class="post-avatar">🧑</div>
+                            <div class="post-author">
+                                <div class="post-name">Ahmet Yılmaz</div>
+                                <div class="post-handle">@ahmetyilmaz · 2s</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            Press Start 2P fontu web tasarımında mükemmel görünüyor! Retro hissiyatı tam yakalıyor 🔥
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn"><span class="icon icon-comment">💬</span> 15</button>
+                            <button class="action-btn"><span class="icon icon-repost">🔄</span> 7</button>
+                            <button class="action-btn"><span class="icon icon-like">❤️</span> 34</button>
+                            <button class="action-btn"><span class="icon icon-share">📤</span></button>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <div class="post-avatar">🧑</div>
+                            <div class="post-author">
+                                <div class="post-name">Ahmet Yılmaz</div>
+                                <div class="post-handle">@ahmetyilmaz · 3g</div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            CSS Grid ile layout yapmak çok eğlenceli. Modern web development araçları harika! 💻
+                        </div>
+                        <div class="post-actions">
+                            <button class="action-btn"><span class="icon icon-comment">💬</span> 6</button>
+                            <button class="action-btn"><span class="icon icon-repost">🔄</span> 2</button>
+                            <button class="action-btn"><span class="icon icon-like">❤️</span> 18</button>
+                            <button class="action-btn"><span class="icon icon-share">📤</span></button>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Replies Tab (Empty state) -->
+                <div class="profile-tab-content" id="replies-tab">
+                    <div class="empty-state">
+                        <div class="empty-icon">💬</div>
+                        <div class="empty-title">Henüz yanıt yok</div>
+                        <div class="empty-description">Başkalarının gönderilerine yanıt verdiğinde burada görünecek.</div>
+                    </div>
+                </div>
+
+                <!-- Media Tab (Empty state) -->
+                <div class="profile-tab-content" id="media-tab">
+                    <div class="empty-state">
+                        <div class="empty-icon">🖼️</div>
+                        <div class="empty-title">Henüz medya yok</div>
+                        <div class="empty-description">Fotoğraf veya video paylaştığında burada görünecek.</div>
+                    </div>
+                </div>
+
+                <!-- Likes Tab (Empty state) -->
+                <div class="profile-tab-content" id="likes-tab">
+                    <div class="empty-state">
+                        <div class="empty-icon">❤️</div>
+                        <div class="empty-title">Henüz beğeni yok</div>
+                        <div class="empty-description">Gönderileri beğendiğinde burada görünecek.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Messages Section -->
+        <section class="feed content-section" id="messages-section">
+            <div class="messages-container">
+                <!-- Messages Sidebar -->
+                <aside class="messages-sidebar">
+                    <div class="messages-header">
+                        <h2 class="messages-title">💬 MESAJLAR</h2>
+                        <button class="new-message-btn">+ Yeni</button>
+                    </div>
+                    <div class="messages-search">
+                        <input type="text" placeholder="Ara..." class="messages-search-input">
+                    </div>
+                    <div class="conversations-list">
+                        <!-- Conversation Item 1 -->
+                        <div class="conversation-item active">
+                            <div class="conversation-avatar">👩</div>
+                            <div class="conversation-info">
+                                <div class="conversation-header">
+                                    <div class="conversation-name">Zeynep Kara</div>
+                                    <div class="conversation-time">5d</div>
+                                </div>
+                                <div class="conversation-preview">Harika bir proje olmuş! Tebrikler 🎉</div>
+                            </div>
+                            <div class="conversation-badge">2</div>
+                        </div>
+
+                        <!-- Conversation Item 2 -->
+                        <div class="conversation-item">
+                            <div class="conversation-avatar">🧔</div>
+                            <div class="conversation-info">
+                                <div class="conversation-header">
+                                    <div class="conversation-name">Mehmet Demir</div>
+                                    <div class="conversation-time">1s</div>
+                                </div>
+                                <div class="conversation-preview">Gruvbox teması için kaynak var mı?</div>
+                            </div>
+                        </div>
+
+                        <!-- Conversation Item 3 -->
+                        <div class="conversation-item">
+                            <div class="conversation-avatar">👨</div>
+                            <div class="conversation-info">
+                                <div class="conversation-header">
+                                    <div class="conversation-name">Can Özdemir</div>
+                                    <div class="conversation-time">2s</div>
+                                </div>
+                                <div class="conversation-preview">Pixel art için hangi araçları kullanıyo...</div>
+                            </div>
+                        </div>
+
+                        <!-- Conversation Item 4 -->
+                        <div class="conversation-item">
+                            <div class="conversation-avatar">👩</div>
+                            <div class="conversation-info">
+                                <div class="conversation-header">
+                                    <div class="conversation-name">Ayşe Yıldız</div>
+                                    <div class="conversation-time">3s</div>
+                                </div>
+                                <div class="conversation-preview">Retro tema çok güzel olmuş!</div>
+                            </div>
+                        </div>
+
+                        <!-- Conversation Item 5 -->
+                        <div class="conversation-item">
+                            <div class="conversation-avatar">🧑</div>
+                            <div class="conversation-info">
+                                <div class="conversation-header">
+                                    <div class="conversation-name">Emre Şahin</div>
+                                    <div class="conversation-time">1h</div>
+                                </div>
+                                <div class="conversation-preview">CSS Grid kullanımı hakkında...</div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Messages Chat Area -->
+                <div class="messages-chat">
+                    <!-- Chat Header -->
+                    <div class="chat-header">
+                        <div class="chat-user-info">
+                            <div class="chat-avatar">👩</div>
+                            <div class="chat-user-details">
+                                <div class="chat-user-name">Zeynep Kara</div>
+                                <div class="chat-user-status">Aktif</div>
+                            </div>
+                        </div>
+                        <button class="chat-menu-btn">⋮</button>
+                    </div>
+
+                    <!-- Chat Messages -->
+                    <div class="chat-messages">
+                        <div class="message-group">
+                            <div class="message-date">BUGÜN</div>
+                        </div>
+
+                        <div class="message received">
+                            <div class="message-avatar">👩</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Merhaba! Bread Social projesini gördüm, gerçekten harika olmuş!
+                                </div>
+                                <div class="message-time">14:23</div>
+                            </div>
+                        </div>
+
+                        <div class="message received">
+                            <div class="message-avatar">👩</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Gruvbox teması mükemmel uyumlanmış. Renk paleti çok iyi 🎨
+                                </div>
+                                <div class="message-time">14:24</div>
+                            </div>
+                        </div>
+
+                        <div class="message sent">
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Çok teşekkür ederim! Retro tasarım yapmayı çok seviyorum 😊
+                                </div>
+                                <div class="message-time">14:25</div>
+                            </div>
+                        </div>
+
+                        <div class="message sent">
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Press Start 2P fontu kullanmak da güzel bir dokunuş oldu
+                                </div>
+                                <div class="message-time">14:25</div>
+                            </div>
+                        </div>
+
+                        <div class="message received">
+                            <div class="message-avatar">👩</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Kesinlikle! Pixel art estetiği harika. Bu projeyi paylaşmayı düşünüyor musun?
+                                </div>
+                                <div class="message-time">14:26</div>
+                            </div>
+                        </div>
+
+                        <div class="message sent">
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Evet, GitHub'a koyacağım yakında. Belki başkaları da katkıda bulunur 🚀
+                                </div>
+                                <div class="message-time">14:27</div>
+                            </div>
+                        </div>
+
+                        <div class="message received">
+                            <div class="message-avatar">👩</div>
+                            <div class="message-content">
+                                <div class="message-bubble">
+                                    Harika bir proje olmuş! Tebrikler 🎉
+                                </div>
+                                <div class="message-time">14:28</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div class="chat-input-container">
+                        <button class="chat-attach-btn">📎</button>
+                        <input type="text" placeholder="Mesaj yaz..." class="chat-input">
+                        <button class="chat-send-btn">GÖNDER</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Trends Section -->
+            <div class="sidebar-card">
+                <div class="sidebar-header">Trendler</div>
+                <div class="trend-item">
+                    <div class="trend-category">Teknoloji</div>
+                    <div class="trend-topic">#GruvboxTheme</div>
+                    <div class="trend-stats">2.4K tweet</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-category">Yazılım</div>
+                    <div class="trend-topic">#RetroDesign</div>
+                    <div class="trend-stats">1.8K tweet</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-category">Web Dev</div>
+                    <div class="trend-topic">#PixelArt</div>
+                    <div class="trend-stats">3.2K tweet</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-category">CSS</div>
+                    <div class="trend-topic">#ModernWeb</div>
+                    <div class="trend-stats">5.1K tweet</div>
+                </div>
+            </div>
+
+            <!-- Who to Follow -->
+            <div class="sidebar-card">
+                <div class="sidebar-header">Takip Et</div>
+                <div class="follow-item">
+                    <div class="follow-avatar">🎨</div>
+                    <div class="follow-info">
+                        <div class="follow-name">Design Studio</div>
+                        <div class="follow-handle">@designstudio</div>
+                    </div>
+                    <button class="follow-btn">Takip Et</button>
+                </div>
+                <div class="follow-item">
+                    <div class="follow-avatar">💻</div>
+                    <div class="follow-info">
+                        <div class="follow-name">Dev Community</div>
+                        <div class="follow-handle">@devcommunity</div>
+                    </div>
+                    <button class="follow-btn">Takip Et</button>
+                </div>
+                <div class="follow-item">
+                    <div class="follow-avatar">🚀</div>
+                    <div class="follow-info">
+                        <div class="follow-name">Tech News</div>
+                        <div class="follow-handle">@technews</div>
+                    </div>
+                    <button class="follow-btn">Takip Et</button>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="sidebar-footer">
+                <a href="#">Hakkında</a>
+                <a href="#">Yardım</a>
+                <a href="#">Gizlilik</a>
+                <a href="#">Şartlar</a>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Notifications Modal -->
+    <div class="modal" id="notifications-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🔔 BİLDİRİMLER</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Notification Items -->
+                <div class="notification-item unread">
+                    <div class="notification-icon">❤️</div>
+                    <div class="notification-content">
+                        <div class="notification-text">
+                            <strong>Zeynep Kara</strong> gönderini beğendi
+                        </div>
+                        <div class="notification-time">5 dakika önce</div>
+                    </div>
+                </div>
+
+                <div class="notification-item unread">
+                    <div class="notification-icon">💬</div>
+                    <div class="notification-content">
+                        <div class="notification-text">
+                            <strong>Mehmet Demir</strong> gönderine yorum yaptı
+                        </div>
+                        <div class="notification-time">15 dakika önce</div>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-icon">👤</div>
+                    <div class="notification-content">
+                        <div class="notification-text">
+                            <strong>Can Özdemir</strong> seni takip etmeye başladı
+                        </div>
+                        <div class="notification-time">1 saat önce</div>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-icon">🔄</div>
+                    <div class="notification-content">
+                        <div class="notification-text">
+                            <strong>Ayşe Yıldız</strong> gönderini paylaştı
+                        </div>
+                        <div class="notification-time">2 saat önce</div>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-icon">❤️</div>
+                    <div class="notification-content">
+                        <div class="notification-text">
+                            <strong>Emre Şahin</strong> gönderini beğendi
+                        </div>
+                        <div class="notification-time">3 saat önce</div>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-icon">💬</div>
+                    <div class="notification-content">
+                        <div class="notification-text">
+                            <strong>Ahmet Yılmaz</strong> yorumuna yanıt verdi
+                        </div>
+                        <div class="notification-time">1 gün önce</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn">Tümünü Okundu İşaretle</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Post Modal -->
+    <div class="modal" id="new-post-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content new-post-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">✏️ YENİ POST</h2>
+                <button class="modal-close new-post-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- User Info -->
+                <div class="new-post-user">
+                    <div class="new-post-avatar">🧑</div>
+                    <div class="new-post-username">Ahmet Yılmaz</div>
+                </div>
+
+                <!-- Post Textarea -->
+                <textarea
+                    class="new-post-textarea"
+                    placeholder="Ne düşünüyorsun?"
+                    maxlength="500"
+                ></textarea>
+
+                <!-- Character Counter -->
+                <div class="new-post-counter">
+                    <span class="char-count">0</span> / 500
+                </div>
+
+                <!-- Post Options -->
+                <div class="new-post-options">
+                    <button class="post-option-btn" title="Emoji">😀</button>
+                    <button class="post-option-btn" title="Fotoğraf">🖼️</button>
+                    <button class="post-option-btn" title="GIF">🎬</button>
+                    <button class="post-option-btn" title="Anket">📊</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn-cancel">İptal</button>
+                <button class="modal-btn-primary post-submit-btn" disabled>PAYLAŞ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
