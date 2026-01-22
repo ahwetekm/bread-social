@@ -34,12 +34,15 @@ Bu doküman, Claude AI asistanına **Bread Social** projesi hakkında kapsamlı 
 - ✅ Retro piksel-sanat estetiği
 - ✅ Gruvbox Dark renk paleti
 - ✅ Responsive tasarım (desktop → mobile)
-- ✅ Post oluşturma, beğenme, yorum, paylaşım
-- ✅ Kullanıcı profilleri ve takip sistemi
-- ✅ Trending/popüler içerik keşfi
-- ❌ **Backend henüz implement edilmemiş** (sadece frontend mock-up)
-- ❌ **Veritabanı entegrasyonu yok**
-- ❌ **Authentication sistemi yok**
+- ✅ Post oluşturma, beğenme, yorum, paylaşım (frontend mock-up)
+- ✅ Kullanıcı profilleri ve takip sistemi (frontend mock-up)
+- ✅ Trending/popüler içerik keşfi (frontend mock-up)
+- ✅ **Backend API** (Express.js + Turso database)
+- ✅ **Veritabanı entegrasyonu** (Turso - SQLite cloud)
+- ✅ **Authentication sistemi** (JWT + bcrypt, cookie-based)
+- ❌ Post API endpoint'leri henüz implement edilmemiş
+- ❌ Follow sistemi backend'de yok
+- ❌ Real-time özellikler yok
 
 ### Hedef Kullanıcılar
 - Retro/nostalji seven kullanıcılar
@@ -58,20 +61,28 @@ Bu doküman, Claude AI asistanına **Bread Social** projesi hakkında kapsamlı 
 
 ### Backend
 - **Runtime**: Node.js (v18+ önerilir)
-- **Framework**: Express.js v4.22.1+
+- **Framework**: Express.js v4.18.2+
+- **Database**: Turso (@libsql/client v0.17.0+)
+- **Authentication**: JWT (jsonwebtoken v9.0.3+) + bcryptjs v3.0.3+
+- **Security**: Helmet v8.1.0+, CORS v2.8.5+, express-rate-limit v8.2.1+
 - **Server**: HTTP (HTTPS için reverse proxy önerilir)
 
 ### DevOps
-- **Dev Server**: Nodemon v3.1.11+
+- **Dev Server**: Nodemon v3.0.2+
 - **Package Manager**: npm (yarn veya pnpm kullanma)
 - **Version Control**: Git (GitHub)
+- **Environment**: dotenv v17.2.3+
+
+### Mevcut Entegrasyonlar
+- ✅ **Database**: Turso (SQLite cloud) - @libsql/client
+- ✅ **Authentication**: JWT + bcryptjs (cookie-based)
+- ✅ **Rate Limiting**: express-rate-limit
+- ✅ **Security Headers**: Helmet.js
 
 ### Gelecek Entegrasyonlar (Planlanıyor)
-- **Database**: Turso (SQLite cloud) veya PostgreSQL
-- **Authentication**: JWT + bcrypt
-- **Real-time**: Socket.io
-- **File Upload**: Cloudinary veya AWS S3
-- **Email**: SendGrid veya Mailgun
+- ❌ **Real-time**: Socket.io
+- ❌ **File Upload**: Cloudinary veya AWS S3
+- ❌ **Email**: SendGrid veya Mailgun
 
 ---
 
@@ -79,31 +90,58 @@ Bu doküman, Claude AI asistanına **Bread Social** projesi hakkında kapsamlı 
 
 ```
 bread-social/
-├── server.js              # Express server entry point
-├── package.json           # NPM configuration
-├── package-lock.json      # Dependency lock file
-├── .gitignore            # Git ignore patterns
-├── CLAUDE.md             # Bu dosya - AI kılavuzu
-├── README.md             # Kullanıcı dokümantasyonu (oluşturulacak)
-└── public/               # Static frontend files
-    ├── index.html        # Ana HTML dosyası (390+ satır)
-    ├── css/
-    │   └── style.css     # Ana stylesheet (1156+ satır)
-    ├── js/
-    │   └── app.js        # Client-side JavaScript
-    └── assets/           # Statik dosyalar (boş, hazır)
-        ├── images/       # (oluşturulacak)
-        └── icons/        # (oluşturulacak)
+├── server.js                    # Express server entry point (102 satır)
+├── package.json                 # NPM configuration
+├── package-lock.json            # Dependency lock file
+├── .gitignore                   # Git ignore patterns
+├── CLAUDE.md                    # Bu dosya - AI kılavuzu
+├── README.md                    # Kullanıcı dokümantasyonu (oluşturulacak)
+├── public/                      # Static frontend files
+│   ├── index.html               # Ana HTML dosyası (739 satır)
+│   ├── css/
+│   │   └── style.css            # Ana stylesheet (2424 satır)
+│   ├── js/
+│   │   ├── app.js               # Client-side JavaScript (290 satır)
+│   │   └── auth.js              # Authentication client (300 satır)
+│   └── assets/                  # Statik dosyalar
+│       ├── images/              # (oluşturulacak)
+│       └── icons/               # (oluşturulacak)
+└── src/                         # Backend source files
+    ├── config/
+    │   └── database.js          # Turso database configuration
+    ├── controllers/
+    │   └── authController.js    # Authentication controller
+    ├── middleware/
+    │   ├── auth.js              # JWT authentication middleware
+    │   ├── rateLimiter.js       # Rate limiting middleware
+    │   └── validation.js        # Input validation middleware
+    ├── models/
+    │   └── User.js              # User model
+    ├── routes/
+    │   ├── index.js             # Main router
+    │   └── auth.js              # Auth routes
+    └── utils/
+        ├── hash.js              # Password hashing (bcrypt)
+        └── jwt.js               # JWT token utilities
 ```
 
 ### Dosya Organizasyonu Kuralları
 
 **Kısıtlama #1**: Yeni klasörler oluşturmadan önce mevcut yapıyı kullan.
 **Kısıtlama #2**: `public/` dışında frontend dosyası koyma.
-**Kısıtlama #3**: Backend kodları için `src/` veya `server/` klasörü oluşturulabilir (henüz yok).
+**Kısıtlama #3**: Backend kodları `src/` klasöründe organize edilmeli.
 **Kısıtlama #4**: Tüm statik asset'ler `public/assets/` altında olmalı.
 **Kısıtlama #5**: CSS dosyalarını parçalamak için `css/components/` alt klasörü kullanılabilir.
 **Kısıtlama #6**: Utility JavaScript'leri için `js/utils/` alt klasörü kullanılabilir.
+
+### Backend Klasör Yapısı (src/)
+
+- **config/**: Database ve uygulama konfigürasyonları
+- **controllers/**: Request handler'lar (business logic)
+- **middleware/**: Express middleware'leri (auth, validation, rate limit)
+- **models/**: Database model'leri ve query'ler
+- **routes/**: API route tanımları
+- **utils/**: Yardımcı fonksiyonlar (hash, jwt, vb.)
 
 ---
 
@@ -373,6 +411,24 @@ bread-social/
 **Kısıtlama #113**: Environment variables `.env` dosyasında sakla.
 **Kısıtlama #114**: `.env` dosyasını git'e commit etme (.gitignore'da).
 **Kısıtlama #115**: PORT varsayılan: `3000`.
+
+### Gerekli Environment Variables
+```bash
+# Server
+PORT=3000
+NODE_ENV=development
+
+# Database (Turso)
+TURSO_DATABASE_URL=libsql://your-database.turso.io
+TURSO_AUTH_TOKEN=your-auth-token
+
+# JWT Secrets
+JWT_ACCESS_SECRET=your-access-secret-min-32-chars
+JWT_REFRESH_SECRET=your-refresh-secret-min-32-chars
+
+# CORS (production only)
+CORS_ORIGINS=https://yourdomain.com
+```
 **Kısıtlama #116**: Process.env.NODE_ENV kontrol et (`development`, `production`).
 **Kısıtlama #117**: Helmet.js kullan güvenlik için (HTTP headers).
 **Kısıtlama #118**: CORS policy belirle (wildcard `*` kullanma production'da).
@@ -380,12 +436,26 @@ bread-social/
 ### API Design
 
 **Kısıtlama #119**: RESTful convention'ları takip et:
+
+### Mevcut API Endpoint'leri (Implement Edilmiş)
 ```
-GET    /api/v1/posts       → Tüm postlar
-GET    /api/v1/posts/:id   → Tek post
-POST   /api/v1/posts       → Yeni post oluştur
-PUT    /api/v1/posts/:id   → Post güncelle
-DELETE /api/v1/posts/:id   → Post sil
+GET    /api/v1/health         → API sağlık kontrolü
+POST   /api/v1/auth/register  → Yeni kullanıcı kaydı
+POST   /api/v1/auth/login     → Kullanıcı girişi
+GET    /api/v1/auth/me        → Oturum açmış kullanıcı bilgisi
+POST   /api/v1/auth/logout    → Çıkış yap
+```
+
+### Planlanmış API Endpoint'leri (Henüz Yok)
+```
+GET    /api/v1/posts          → Tüm postlar
+GET    /api/v1/posts/:id      → Tek post
+POST   /api/v1/posts          → Yeni post oluştur
+PUT    /api/v1/posts/:id      → Post güncelle
+DELETE /api/v1/posts/:id      → Post sil
+GET    /api/v1/users/:username → Kullanıcı profili
+POST   /api/v1/users/:id/follow → Kullanıcıyı takip et
+DELETE /api/v1/users/:id/follow → Takibi bırak
 ```
 
 **Kısıtlama #120**: HTTP status code'ları doğru kullan:
@@ -661,29 +731,51 @@ fix: Resolve login button styling issue
 
 ## Ek Notlar ve Gelecek Planlar
 
-### Öncelikli Geliştirmeler
+### Tamamlanan Geliştirmeler
 
-1. **Backend API Implementasyonu**
-   - Express.js route'ları
-   - Database entegrasyonu (Turso/PostgreSQL)
-   - Authentication sistemi (JWT)
+1. ✅ **Backend API Altyapısı**
+   - Express.js server ve middleware'ler
+   - Turso database entegrasyonu
+   - JWT authentication sistemi (cookie-based)
+   - Rate limiting ve input validation
+   - Security headers (Helmet.js)
 
-2. **Real-time Özellikler**
+2. ✅ **Authentication Sistemi**
+   - Kullanıcı kaydı (register)
+   - Kullanıcı girişi (login)
+   - Oturum kontrolü (/me endpoint)
+   - Çıkış (logout)
+   - Frontend auth modals
+
+### Öncelikli Geliştirmeler (Sıradaki)
+
+1. **Post API Implementasyonu**
+   - CRUD endpoint'leri (create, read, update, delete)
+   - Feed algoritması
+   - Beğeni sistemi
+   - Yorum sistemi
+
+2. **Kullanıcı Profili API**
+   - Profil güncelleme
+   - Takip/takipçi sistemi
+   - Avatar emoji seçimi
+
+3. **Real-time Özellikler**
    - Socket.io entegrasyonu
    - Live notifications
    - Online user presence
 
-3. **File Upload**
+4. **File Upload**
    - Avatar upload
    - Image post support
    - Cloudinary entegrasyonu
 
-4. **Testing Suite**
+5. **Testing Suite**
    - Jest unit tests
    - Supertest API tests
    - Playwright E2E tests
 
-5. **DevOps**
+6. **DevOps**
    - Docker containerization
    - CI/CD pipeline (GitHub Actions)
    - Deployment automation
@@ -719,8 +811,8 @@ Bu doküman, Bread Social projesinin tüm yönlerini kapsamaktadır. **220+ kıs
 
 ---
 
-**Son Güncelleme**: 2025-01-20
-**Versiyon**: 1.0.0
+**Son Güncelleme**: 2026-01-22
+**Versiyon**: 1.1.0
 **Durum**: Aktif
 **Yazar**: Bread Social Development Team
 

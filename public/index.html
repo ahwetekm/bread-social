@@ -20,8 +20,16 @@
                 <input type="text" placeholder="Ara..." class="search-input">
             </div>
             <div class="nav-actions">
-                <button class="nav-btn">Bildirimler</button>
-                <button class="nav-btn">Profil</button>
+                <!-- Authenticated user actions -->
+                <div class="auth-actions authenticated">
+                    <button class="nav-btn" id="notifications-btn">Bildirimler</button>
+                    <button class="nav-btn" id="profile-btn">Profil</button>
+                </div>
+                <!-- Guest actions -->
+                <div class="auth-actions guest">
+                    <button class="nav-btn nav-btn-secondary" id="login-btn">Giriş Yap</button>
+                    <button class="nav-btn nav-btn-primary" id="register-btn">Kayıt Ol</button>
+                </div>
             </div>
         </div>
     </header>
@@ -39,22 +47,22 @@
                     <span class="nav-icon">🔍</span>
                     <span class="nav-label">Keşfet</span>
                 </a>
-                <a href="#" class="nav-item" data-section="messages">
+                <a href="#" class="nav-item" data-section="messages" data-auth-required="true">
                     <span class="nav-icon">💬</span>
                     <span class="nav-label">Mesajlar</span>
                 </a>
-                <a href="#" class="nav-item" data-section="profile">
+                <a href="#" class="nav-item" data-section="profile" data-auth-required="true">
                     <span class="nav-icon">👤</span>
                     <span class="nav-label">Profil</span>
                 </a>
             </nav>
-            <button class="post-btn">+ YENİ POST</button>
+            <button class="post-btn" data-auth-required="true">+ YENİ POST</button>
         </aside>
 
         <!-- Home Feed Section -->
         <section class="feed content-section active" id="home-section">
-            <!-- Post Creation Box -->
-            <div class="post-create">
+            <!-- Post Creation Box (Auth Required) -->
+            <div class="post-create" data-auth-required="true">
                 <div class="post-create-header">Ne düşünüyorsun?</div>
                 <textarea class="post-create-input" placeholder="Birşeyler yaz..."></textarea>
                 <div class="post-create-actions">
@@ -470,174 +478,11 @@
 
         <!-- Messages Section -->
         <section class="feed content-section" id="messages-section">
-            <div class="messages-container">
-                <!-- Messages Sidebar -->
-                <aside class="messages-sidebar">
-                    <div class="messages-header">
-                        <h2 class="messages-title">💬 MESAJLAR</h2>
-                        <button class="new-message-btn">+ Yeni</button>
-                    </div>
-                    <div class="messages-search">
-                        <input type="text" placeholder="Ara..." class="messages-search-input">
-                    </div>
-                    <div class="conversations-list">
-                        <!-- Conversation Item 1 -->
-                        <div class="conversation-item active">
-                            <div class="conversation-avatar">👩</div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="conversation-name">Zeynep Kara</div>
-                                    <div class="conversation-time">5d</div>
-                                </div>
-                                <div class="conversation-preview">Harika bir proje olmuş! Tebrikler 🎉</div>
-                            </div>
-                            <div class="conversation-badge">2</div>
-                        </div>
-
-                        <!-- Conversation Item 2 -->
-                        <div class="conversation-item">
-                            <div class="conversation-avatar">🧔</div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="conversation-name">Mehmet Demir</div>
-                                    <div class="conversation-time">1s</div>
-                                </div>
-                                <div class="conversation-preview">Gruvbox teması için kaynak var mı?</div>
-                            </div>
-                        </div>
-
-                        <!-- Conversation Item 3 -->
-                        <div class="conversation-item">
-                            <div class="conversation-avatar">👨</div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="conversation-name">Can Özdemir</div>
-                                    <div class="conversation-time">2s</div>
-                                </div>
-                                <div class="conversation-preview">Pixel art için hangi araçları kullanıyo...</div>
-                            </div>
-                        </div>
-
-                        <!-- Conversation Item 4 -->
-                        <div class="conversation-item">
-                            <div class="conversation-avatar">👩</div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="conversation-name">Ayşe Yıldız</div>
-                                    <div class="conversation-time">3s</div>
-                                </div>
-                                <div class="conversation-preview">Retro tema çok güzel olmuş!</div>
-                            </div>
-                        </div>
-
-                        <!-- Conversation Item 5 -->
-                        <div class="conversation-item">
-                            <div class="conversation-avatar">🧑</div>
-                            <div class="conversation-info">
-                                <div class="conversation-header">
-                                    <div class="conversation-name">Emre Şahin</div>
-                                    <div class="conversation-time">1h</div>
-                                </div>
-                                <div class="conversation-preview">CSS Grid kullanımı hakkında...</div>
-                            </div>
-                        </div>
-                    </div>
-                </aside>
-
-                <!-- Messages Chat Area -->
-                <div class="messages-chat">
-                    <!-- Chat Header -->
-                    <div class="chat-header">
-                        <div class="chat-user-info">
-                            <div class="chat-avatar">👩</div>
-                            <div class="chat-user-details">
-                                <div class="chat-user-name">Zeynep Kara</div>
-                                <div class="chat-user-status">Aktif</div>
-                            </div>
-                        </div>
-                        <button class="chat-menu-btn">⋮</button>
-                    </div>
-
-                    <!-- Chat Messages -->
-                    <div class="chat-messages">
-                        <div class="message-group">
-                            <div class="message-date">BUGÜN</div>
-                        </div>
-
-                        <div class="message received">
-                            <div class="message-avatar">👩</div>
-                            <div class="message-content">
-                                <div class="message-bubble">
-                                    Merhaba! Bread Social projesini gördüm, gerçekten harika olmuş!
-                                </div>
-                                <div class="message-time">14:23</div>
-                            </div>
-                        </div>
-
-                        <div class="message received">
-                            <div class="message-avatar">👩</div>
-                            <div class="message-content">
-                                <div class="message-bubble">
-                                    Gruvbox teması mükemmel uyumlanmış. Renk paleti çok iyi 🎨
-                                </div>
-                                <div class="message-time">14:24</div>
-                            </div>
-                        </div>
-
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">
-                                    Çok teşekkür ederim! Retro tasarım yapmayı çok seviyorum 😊
-                                </div>
-                                <div class="message-time">14:25</div>
-                            </div>
-                        </div>
-
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">
-                                    Press Start 2P fontu kullanmak da güzel bir dokunuş oldu
-                                </div>
-                                <div class="message-time">14:25</div>
-                            </div>
-                        </div>
-
-                        <div class="message received">
-                            <div class="message-avatar">👩</div>
-                            <div class="message-content">
-                                <div class="message-bubble">
-                                    Kesinlikle! Pixel art estetiği harika. Bu projeyi paylaşmayı düşünüyor musun?
-                                </div>
-                                <div class="message-time">14:26</div>
-                            </div>
-                        </div>
-
-                        <div class="message sent">
-                            <div class="message-content">
-                                <div class="message-bubble">
-                                    Evet, GitHub'a koyacağım yakında. Belki başkaları da katkıda bulunur 🚀
-                                </div>
-                                <div class="message-time">14:27</div>
-                            </div>
-                        </div>
-
-                        <div class="message received">
-                            <div class="message-avatar">👩</div>
-                            <div class="message-content">
-                                <div class="message-bubble">
-                                    Harika bir proje olmuş! Tebrikler 🎉
-                                </div>
-                                <div class="message-time">14:28</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Chat Input -->
-                    <div class="chat-input-container">
-                        <button class="chat-attach-btn">📎</button>
-                        <input type="text" placeholder="Mesaj yaz..." class="chat-input">
-                        <button class="chat-send-btn">GÖNDER</button>
-                    </div>
+            <div class="section-empty-state">
+                <div class="empty-state">
+                    <div class="empty-icon">💬</div>
+                    <div class="empty-title">Mesajlar</div>
+                    <div class="empty-description">Mesajlaşma özelliği yakında aktif olacak.</div>
                 </div>
             </div>
         </section>
@@ -717,69 +562,11 @@
                 <button class="modal-close">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- Notification Items -->
-                <div class="notification-item unread">
-                    <div class="notification-icon">❤️</div>
-                    <div class="notification-content">
-                        <div class="notification-text">
-                            <strong>Zeynep Kara</strong> gönderini beğendi
-                        </div>
-                        <div class="notification-time">5 dakika önce</div>
-                    </div>
+                <div class="empty-state">
+                    <div class="empty-icon">🔔</div>
+                    <div class="empty-title">Bildirim yok</div>
+                    <div class="empty-description">Bildirim özelliği yakında aktif olacak.</div>
                 </div>
-
-                <div class="notification-item unread">
-                    <div class="notification-icon">💬</div>
-                    <div class="notification-content">
-                        <div class="notification-text">
-                            <strong>Mehmet Demir</strong> gönderine yorum yaptı
-                        </div>
-                        <div class="notification-time">15 dakika önce</div>
-                    </div>
-                </div>
-
-                <div class="notification-item">
-                    <div class="notification-icon">👤</div>
-                    <div class="notification-content">
-                        <div class="notification-text">
-                            <strong>Can Özdemir</strong> seni takip etmeye başladı
-                        </div>
-                        <div class="notification-time">1 saat önce</div>
-                    </div>
-                </div>
-
-                <div class="notification-item">
-                    <div class="notification-icon">🔄</div>
-                    <div class="notification-content">
-                        <div class="notification-text">
-                            <strong>Ayşe Yıldız</strong> gönderini paylaştı
-                        </div>
-                        <div class="notification-time">2 saat önce</div>
-                    </div>
-                </div>
-
-                <div class="notification-item">
-                    <div class="notification-icon">❤️</div>
-                    <div class="notification-content">
-                        <div class="notification-text">
-                            <strong>Emre Şahin</strong> gönderini beğendi
-                        </div>
-                        <div class="notification-time">3 saat önce</div>
-                    </div>
-                </div>
-
-                <div class="notification-item">
-                    <div class="notification-icon">💬</div>
-                    <div class="notification-content">
-                        <div class="notification-text">
-                            <strong>Ahmet Yılmaz</strong> yorumuna yanıt verdi
-                        </div>
-                        <div class="notification-time">1 gün önce</div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="modal-btn">Tümünü Okundu İşaretle</button>
             </div>
         </div>
     </div>
@@ -826,6 +613,127 @@
         </div>
     </div>
 
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content auth-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🔐 GİRİŞ YAP</h2>
+                <button class="modal-close login-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-identifier" class="form-label">E-posta veya Kullanıcı Adı</label>
+                        <input
+                            type="text"
+                            id="login-identifier"
+                            name="identifier"
+                            class="form-input"
+                            placeholder="ornek@email.com"
+                            required
+                            autocomplete="username"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password" class="form-label">Şifre</label>
+                        <input
+                            type="password"
+                            id="login-password"
+                            name="password"
+                            class="form-input"
+                            placeholder="********"
+                            required
+                            autocomplete="current-password"
+                        >
+                    </div>
+                    <div class="form-error" id="login-error"></div>
+                    <button type="submit" class="form-submit-btn">GİRİŞ YAP</button>
+                </form>
+                <div class="auth-switch">
+                    Hesabın yok mu? <a href="#" id="switch-to-register">Kayıt ol</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content auth-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📝 KAYIT OL</h2>
+                <button class="modal-close register-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="register-username" class="form-label">Kullanıcı Adı</label>
+                        <input
+                            type="text"
+                            id="register-username"
+                            name="username"
+                            class="form-input"
+                            placeholder="kullanici_adi"
+                            required
+                            minlength="3"
+                            maxlength="30"
+                            pattern="^[a-zA-Z0-9_]+$"
+                            autocomplete="username"
+                        >
+                        <span class="form-hint">3-30 karakter, harf, rakam ve alt çizgi</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email" class="form-label">E-posta</label>
+                        <input
+                            type="email"
+                            id="register-email"
+                            name="email"
+                            class="form-input"
+                            placeholder="ornek@email.com"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password" class="form-label">Şifre</label>
+                        <input
+                            type="password"
+                            id="register-password"
+                            name="password"
+                            class="form-input"
+                            placeholder="********"
+                            required
+                            minlength="8"
+                            autocomplete="new-password"
+                        >
+                        <span class="form-hint">En az 8 karakter, 1 harf ve 1 rakam</span>
+                    </div>
+                    <div class="form-error" id="register-error"></div>
+                    <button type="submit" class="form-submit-btn">KAYIT OL</button>
+                </form>
+                <div class="auth-switch">
+                    Zaten hesabın var mı? <a href="#" id="switch-to-login">Giriş yap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guest Welcome Bar -->
+    <div class="guest-bar" id="guest-bar">
+        <div class="guest-bar-content">
+            <span class="guest-bar-text">
+                Hey, tartışmaya hoş geldin. Sen de söz hakkının bulunmasını istiyorsan bir hesap oluşturabilirsin.
+                Seni tanımıyoruz, bize kendini tanıt.
+            </span>
+            <div class="guest-bar-actions">
+                <button class="guest-bar-btn guest-bar-login">Giriş Yap</button>
+                <button class="guest-bar-btn guest-bar-register">Kayıt Ol</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
     <script src="/js/app.js"></script>
 </body>
 </html>

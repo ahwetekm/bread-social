@@ -1649,6 +1649,14 @@ textarea {
 }
 
 /* Empty State */
+.section-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: var(--spacing-xl);
+}
+
 .empty-state {
   background-color: var(--bg-secondary);
   border: var(--border-width) solid var(--bg-tertiary);
@@ -2116,5 +2124,301 @@ textarea {
 
   .conversation-preview {
     font-size: 10px;
+  }
+}
+
+/* ==========================================
+   AUTHENTICATION STYLES
+   ========================================== */
+
+/* Auth-aware visibility */
+[data-auth-required="true"] {
+  display: none;
+}
+
+body.authenticated [data-auth-required="true"] {
+  display: block;
+}
+
+body.authenticated .nav-item[data-auth-required="true"] {
+  display: flex;
+}
+
+body.authenticated .post-btn[data-auth-required="true"] {
+  display: block;
+}
+
+body.authenticated .auth-actions.guest {
+  display: none !important;
+}
+
+body:not(.authenticated) .auth-actions.authenticated {
+  display: none !important;
+}
+
+body.authenticated .auth-actions.authenticated {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.auth-actions.guest {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* Nav button variants */
+.nav-btn-primary {
+  background-color: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--bg-primary);
+}
+
+.nav-btn-primary:hover {
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+}
+
+.nav-btn-secondary {
+  background-color: transparent;
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
+.nav-btn-secondary:hover {
+  background-color: var(--color-blue);
+  color: var(--bg-primary);
+}
+
+/* Auth Modal Styles */
+.auth-modal-content {
+  max-width: 400px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.form-label {
+  font-size: 11px;
+  color: var(--fg-primary);
+  font-weight: bold;
+}
+
+.form-input {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--bg-primary);
+  border: 3px solid var(--bg-tertiary);
+  color: var(--fg-primary);
+  font-family: var(--font-primary);
+  font-size: 12px;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--color-blue);
+}
+
+.form-input::placeholder {
+  color: var(--fg-dim);
+}
+
+.form-hint {
+  font-size: 9px;
+  color: var(--fg-dim);
+}
+
+.form-error {
+  font-size: 10px;
+  color: var(--color-red);
+  min-height: 16px;
+  padding: var(--spacing-xs) 0;
+}
+
+.form-submit-btn {
+  padding: var(--spacing-md);
+  background-color: var(--color-blue);
+  border: 3px solid var(--color-blue);
+  color: var(--bg-primary);
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: none;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+  margin-top: var(--spacing-sm);
+}
+
+.form-submit-btn:hover {
+  background-color: var(--color-aqua);
+  border-color: var(--color-aqua);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.form-submit-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.form-submit-btn:disabled {
+  background-color: var(--bg-tertiary);
+  border-color: var(--bg-tertiary);
+  color: var(--fg-dim);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 10px;
+  color: var(--fg-dim);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 3px solid var(--bg-tertiary);
+}
+
+.auth-switch a {
+  color: var(--color-blue);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  color: var(--color-aqua);
+}
+
+/* Guest Bar */
+.guest-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-secondary);
+  border-top: 3px solid var(--color-yellow);
+  padding: var(--spacing-md);
+  z-index: 150;
+  display: block;
+}
+
+body.authenticated .guest-bar {
+  display: none !important;
+}
+
+.guest-bar-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.guest-bar-text {
+  font-size: 10px;
+  color: var(--fg-secondary);
+  flex: 1;
+  line-height: 1.5;
+}
+
+.guest-bar-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.guest-bar-btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-primary);
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: none;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.guest-bar-login {
+  background-color: var(--bg-tertiary);
+  border: 3px solid var(--color-blue);
+  color: var(--color-blue);
+}
+
+.guest-bar-login:hover {
+  background-color: var(--color-blue);
+  color: var(--bg-primary);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.guest-bar-register {
+  background-color: var(--color-green);
+  border: 3px solid var(--color-green);
+  color: var(--bg-primary);
+}
+
+.guest-bar-register:hover {
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Guest bar padding for main content */
+body:not(.authenticated) .main-container {
+  padding-bottom: 80px;
+}
+
+/* Responsive adjustments for guest bar */
+@media (max-width: 768px) {
+  .guest-bar {
+    bottom: 60px;
+  }
+
+  .guest-bar-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .guest-bar-text {
+    font-size: 9px;
+  }
+
+  body:not(.authenticated) .main-container {
+    padding-bottom: 140px;
+  }
+}
+
+@media (max-width: 600px) {
+  .guest-bar-actions {
+    width: 100%;
+  }
+
+  .guest-bar-btn {
+    flex: 1;
+  }
+
+  .nav-btn-primary,
+  .nav-btn-secondary {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 400px) {
+  .guest-bar-text {
+    font-size: 8px;
+  }
+
+  .guest-bar-btn {
+    font-size: 9px;
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
 }
