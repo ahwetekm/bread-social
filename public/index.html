@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bread Social - Ana Sayfa</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -17,13 +18,15 @@
                 <span class="logo-text">🍞 BREAD SOCIAL</span>
             </div>
             <div class="nav-search">
-                <input type="text" placeholder="Ara..." class="search-input">
+                <input type="text" placeholder="Ara..." class="search-input" id="search-input">
+                <div class="search-loading" id="search-loading">
+                    <div class="search-loading-spinner"></div>
+                </div>
             </div>
             <div class="nav-actions">
                 <!-- Authenticated user actions -->
                 <div class="auth-actions authenticated">
                     <button class="nav-btn" id="notifications-btn">Bildirimler</button>
-                    <button class="nav-btn" id="profile-btn">Profil</button>
                 </div>
                 <!-- Guest actions -->
                 <div class="auth-actions guest">
@@ -51,7 +54,7 @@
                     <span class="nav-icon">💬</span>
                     <span class="nav-label">Mesajlar</span>
                 </a>
-                <a href="#" class="nav-item" data-section="profile" data-auth-required="true">
+                <a href="#" class="nav-item" data-section="profile" data-auth-required="true" id="nav-profile-link">
                     <span class="nav-icon">👤</span>
                     <span class="nav-label">Profil</span>
                 </a>
@@ -72,129 +75,15 @@
 
             <!-- Feed Posts -->
             <div class="posts">
-                <!-- Post 1 -->
-                <article class="post">
-                    <div class="post-header">
-                        <div class="post-avatar">🧑</div>
-                        <div class="post-author">
-                            <div class="post-name">Ahmet Yılmaz</div>
-                            <div class="post-handle">@ahmetyilmaz · 2s</div>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        Gruvbox teması gerçekten harika! Bu retro görünümü çok sevdim 🎨
-                    </div>
-                    <div class="post-actions">
-                        <button class="action-btn"><span class="icon icon-comment">💬</span> 12</button>
-                        <button class="action-btn"><span class="icon icon-repost">🔄</span> 5</button>
-                        <button class="action-btn"><span class="icon icon-like">❤️</span> 23</button>
-                        <button class="action-btn"><span class="icon icon-share">📤</span></button>
-                    </div>
-                </article>
-
-                <!-- Post 2 -->
-                <article class="post">
-                    <div class="post-header">
-                        <div class="post-avatar">👩</div>
-                        <div class="post-author">
-                            <div class="post-name">Zeynep Kara</div>
-                            <div class="post-handle">@zeynepkara · 5d</div>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        Yeni projeme başladım! Node.js ve Turso ile modern bir sosyal medya platformu yapıyorum. Heyecanlıyım! 🚀
-                    </div>
-                    <div class="post-actions">
-                        <button class="action-btn">💬 8</button>
-                        <button class="action-btn">🔄 15</button>
-                        <button class="action-btn">❤️ 45</button>
-                        <button class="action-btn">📤</button>
-                    </div>
-                </article>
-
-                <!-- Post 3 -->
-                <article class="post">
-                    <div class="post-header">
-                        <div class="post-avatar">🧔</div>
-                        <div class="post-author">
-                            <div class="post-name">Mehmet Demir</div>
-                            <div class="post-handle">@mehmetdemir · 1sa</div>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        Pixel art'ın geri dönüşü çok güzel. Retro estetik modern tasarımla buluşunca ortaya harika şeyler çıkıyor 🎮✨
-                    </div>
-                    <div class="post-actions">
-                        <button class="action-btn">💬 3</button>
-                        <button class="action-btn">🔄 7</button>
-                        <button class="action-btn">❤️ 18</button>
-                        <button class="action-btn">📤</button>
-                    </div>
-                </article>
-
-                <!-- Post 4 -->
-                <article class="post">
-                    <div class="post-header">
-                        <div class="post-avatar">👨</div>
-                        <div class="post-author">
-                            <div class="post-name">Can Özdemir</div>
-                            <div class="post-handle">@canozdemir · 3sa</div>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        Monospace fontlar &gt;&gt;&gt; diğer fontlar
-                        <br><br>
-                        Change my mind 😤
-                    </div>
-                    <div class="post-actions">
-                        <button class="action-btn">💬 24</button>
-                        <button class="action-btn">🔄 11</button>
-                        <button class="action-btn">❤️ 67</button>
-                        <button class="action-btn">📤</button>
-                    </div>
-                </article>
-
-                <!-- Post 5 -->
-                <article class="post">
-                    <div class="post-header">
-                        <div class="post-avatar">👧</div>
-                        <div class="post-author">
-                            <div class="post-name">Ayşe Yıldız</div>
-                            <div class="post-handle">@ayseyildiz · 6sa</div>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        CSS Grid + Flexbox = ❤️
-                        <br>
-                        Modern layout sistemleri ile çalışmak gerçekten keyifli
-                    </div>
-                    <div class="post-actions">
-                        <button class="action-btn">💬 9</button>
-                        <button class="action-btn">🔄 4</button>
-                        <button class="action-btn">❤️ 31</button>
-                        <button class="action-btn">📤</button>
-                    </div>
-                </article>
-
-                <!-- Post 6 -->
-                <article class="post">
-                    <div class="post-header">
-                        <div class="post-avatar">🧑</div>
-                        <div class="post-author">
-                            <div class="post-name">Emre Şahin</div>
-                            <div class="post-handle">@emresahin · 12sa</div>
-                        </div>
-                    </div>
-                    <div class="post-content">
-                        Terminal estetiği web tasarımında neden bu kadar popüler? Çünkü developer'ların hepsi terminal sevdalısı 💻🖤
-                    </div>
-                    <div class="post-actions">
-                        <button class="action-btn">💬 16</button>
-                        <button class="action-btn">🔄 28</button>
-                        <button class="action-btn">❤️ 89</button>
-                        <button class="action-btn">📤</button>
-                    </div>
-                </article>
+                <!-- Posts will be loaded dynamically from API -->
+            </div>
+            
+            <!-- Intersection Observer Sentinel for Lazy Loading -->
+            <div id="posts-sentinel" class="posts-sentinel">
+                <div class="loading">Yükleniyor...</div>
+            </div>
+            <div class="load-more-container">
+                <button class="load-more-btn" style="display: none;">Daha Fazla Yükle</button>
             </div>
         </section>
 
@@ -324,6 +213,26 @@
             </div>
         </section>
 
+        <!-- Search Section -->
+        <section class="feed content-section" id="search-section">
+            <!-- Search Header -->
+            <div class="search-header">
+                <h2 class="section-title">🔍 ARAMA SONUÇLARI</h2>
+                <div class="search-query" id="search-query-display"></div>
+            </div>
+
+            <!-- Search Tabs -->
+            <div class="search-tabs">
+                <button class="search-tab active" data-search-type="posts">📝 Gönderiler</button>
+                <button class="search-tab" data-search-type="users">👤 Kullanıcılar</button>
+            </div>
+
+            <!-- Search Results -->
+            <div class="search-results" id="search-results">
+                <!-- Results will be loaded dynamically -->
+            </div>
+        </section>
+
         <!-- Profile Section -->
         <section class="feed content-section" id="profile-section">
             <!-- Profile Header -->
@@ -333,26 +242,26 @@
                     <div class="profile-avatar-large">🧑</div>
                     <div class="profile-meta">
                         <div class="profile-name-section">
-                            <h1 class="profile-display-name">Ahmet Yılmaz</h1>
-                            <div class="profile-username">@ahmetyilmaz</div>
+                            <h1 class="profile-display-name">Yükleniyor...</h1>
+                            <div class="profile-username">@</div>
                         </div>
                         <button class="profile-edit-btn">Profili Düzenle</button>
                     </div>
                 </div>
                 <div class="profile-bio">
-                    <p>Gruvbox severim 🎨 | Retro tasarım tutkunu | Frontend Developer | Pixel art meraklısı</p>
+                    <p>Yükleniyor...</p>
                 </div>
                 <div class="profile-stats">
                     <div class="profile-stat">
-                        <span class="stat-value">234</span>
+                        <span class="stat-value">0</span>
                         <span class="stat-label">Gönderi</span>
                     </div>
                     <div class="profile-stat">
-                        <span class="stat-value">1.2K</span>
+                        <span class="stat-value">0</span>
                         <span class="stat-label">Takipçi</span>
                     </div>
                     <div class="profile-stat">
-                        <span class="stat-value">567</span>
+                        <span class="stat-value">0</span>
                         <span class="stat-label">Takip</span>
                     </div>
                 </div>
@@ -370,81 +279,8 @@
             <div class="profile-content">
                 <!-- Posts Tab -->
                 <div class="profile-tab-content active" id="posts-tab">
-                    <article class="post">
-                        <div class="post-header">
-                            <div class="post-avatar">🧑</div>
-                            <div class="post-author">
-                                <div class="post-name">Ahmet Yılmaz</div>
-                                <div class="post-handle">@ahmetyilmaz · 2s</div>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            Gruvbox teması gerçekten harika! Bu retro görünümü çok sevdim 🎨
-                        </div>
-                        <div class="post-actions">
-                            <button class="action-btn"><span class="icon icon-comment">💬</span> 12</button>
-                            <button class="action-btn"><span class="icon icon-repost">🔄</span> 5</button>
-                            <button class="action-btn"><span class="icon icon-like">❤️</span> 23</button>
-                            <button class="action-btn"><span class="icon icon-share">📤</span></button>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <div class="post-avatar">🧑</div>
-                            <div class="post-author">
-                                <div class="post-name">Ahmet Yılmaz</div>
-                                <div class="post-handle">@ahmetyilmaz · 1s</div>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            Yeni pixel art projesi üzerinde çalışıyorum. Retro oyun karakterleri yapıyorum 🎮✨
-                        </div>
-                        <div class="post-actions">
-                            <button class="action-btn"><span class="icon icon-comment">💬</span> 8</button>
-                            <button class="action-btn"><span class="icon icon-repost">🔄</span> 3</button>
-                            <button class="action-btn"><span class="icon icon-like">❤️</span> 45</button>
-                            <button class="action-btn"><span class="icon icon-share">📤</span></button>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <div class="post-avatar">🧑</div>
-                            <div class="post-author">
-                                <div class="post-name">Ahmet Yılmaz</div>
-                                <div class="post-handle">@ahmetyilmaz · 2s</div>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            Press Start 2P fontu web tasarımında mükemmel görünüyor! Retro hissiyatı tam yakalıyor 🔥
-                        </div>
-                        <div class="post-actions">
-                            <button class="action-btn"><span class="icon icon-comment">💬</span> 15</button>
-                            <button class="action-btn"><span class="icon icon-repost">🔄</span> 7</button>
-                            <button class="action-btn"><span class="icon icon-like">❤️</span> 34</button>
-                            <button class="action-btn"><span class="icon icon-share">📤</span></button>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <div class="post-avatar">🧑</div>
-                            <div class="post-author">
-                                <div class="post-name">Ahmet Yılmaz</div>
-                                <div class="post-handle">@ahmetyilmaz · 3g</div>
-                            </div>
-                        </div>
-                        <div class="post-content">
-                            CSS Grid ile layout yapmak çok eğlenceli. Modern web development araçları harika! 💻
-                        </div>
-                        <div class="post-actions">
-                            <button class="action-btn"><span class="icon icon-comment">💬</span> 6</button>
-                            <button class="action-btn"><span class="icon icon-repost">🔄</span> 2</button>
-                            <button class="action-btn"><span class="icon icon-like">❤️</span> 18</button>
-                            <button class="action-btn"><span class="icon icon-share">📤</span></button>
-                        </div>
-                    </article>
+                    <!-- Posts will be loaded dynamically -->
+                </div>
                 </div>
 
                 <!-- Replies Tab (Empty state) -->
@@ -613,6 +449,99 @@
         </div>
     </div>
 
+    <!-- Post Confirmation Modal -->
+    <div class="modal" id="post-confirm-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content auth-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">✅ POSTU GÖNDER</h2>
+                <button class="modal-close post-confirm-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="post-confirm-message">Bu postu göndermek istediğinizden emin misiniz?</p>
+                <div class="post-confirm-preview" id="post-confirm-preview"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn-cancel post-confirm-cancel">İptal</button>
+                <button class="modal-btn-primary post-confirm-confirm" style="background-color: var(--color-green); border-color: var(--color-green);">GÖNDER</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Post Modal -->
+    <div class="modal" id="edit-post-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content new-post-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">✏️ POSTU DÜZENLE</h2>
+                <button class="modal-close edit-post-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Post Textarea -->
+                <textarea
+                    class="edit-post-textarea"
+                    placeholder="Post içeriği..."
+                    maxlength="500"
+                ></textarea>
+
+                <!-- Character Counter -->
+                <div class="new-post-counter">
+                    <span class="edit-char-count">0</span> / 500
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn-cancel edit-post-cancel">İptal</button>
+                <button class="modal-btn-primary edit-post-save" disabled>KAYDET</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Post Confirmation Modal -->
+    <div class="modal" id="delete-post-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content auth-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🗑️ POSTU SİL</h2>
+                <button class="modal-close delete-post-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="delete-post-message">Bu postu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn-cancel delete-post-cancel">İptal</button>
+                <button class="modal-btn-primary delete-post-confirm" style="background-color: var(--color-red); border-color: var(--color-red);">SİL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comment Modal -->
+    <div class="modal" id="comment-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content comment-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">💬 YORUMLAR</h2>
+                <button class="modal-close comment-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="comments-list" id="comments-list">
+                    <!-- Comments will be loaded dynamically -->
+                </div>
+                <div class="comment-input-container">
+                    <textarea
+                        class="comment-input"
+                        id="comment-input"
+                        placeholder="Yorum yaz..."
+                        maxlength="500"
+                    ></textarea>
+                    <div class="comment-counter">
+                        <span class="comment-char-count">0</span> / 500
+                    </div>
+                    <button class="comment-submit-btn" id="comment-submit-btn" disabled>GÖNDER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Login Modal -->
     <div class="modal" id="login-modal">
         <div class="modal-overlay"></div>
@@ -733,7 +662,9 @@
         </div>
     </div>
 
+    <script src="/js/api.js"></script>
     <script src="/js/auth.js"></script>
+    <script src="/js/profile.js"></script>
     <script src="/js/app.js"></script>
 </body>
 </html>

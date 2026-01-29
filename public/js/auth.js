@@ -25,6 +25,8 @@ const Auth = {
     this.user = user;
     this.isAuthenticated = true;
     document.body.classList.add('authenticated');
+    // Save user to localStorage for post ownership checks
+    localStorage.setItem('user', JSON.stringify(user));
     this.updateUI();
   },
 
@@ -32,6 +34,8 @@ const Auth = {
     this.user = null;
     this.isAuthenticated = false;
     document.body.classList.remove('authenticated');
+    // Clear user from localStorage
+    localStorage.removeItem('user');
     this.updateUI();
   },
 
@@ -49,6 +53,12 @@ const Auth = {
       if (profileUsername) profileUsername.textContent = '@' + this.user.username;
       if (newPostAvatar) newPostAvatar.textContent = this.user.avatar_emoji || '🧑';
       if (newPostUsername) newPostUsername.textContent = this.user.display_name || this.user.username;
+
+      // Update profile link to point to current user's profile
+      const profileLink = document.getElementById('nav-profile-link');
+      if (profileLink) {
+        profileLink.href = `?username=${this.user.username}`;
+      }
     }
   },
 
@@ -170,12 +180,6 @@ const AuthModals = {
     // Form submissions
     document.getElementById('login-form')?.addEventListener('submit', this.handleLogin.bind(this));
     document.getElementById('register-form')?.addEventListener('submit', this.handleRegister.bind(this));
-
-    // Logout button (if profile button is clicked while authenticated)
-    document.getElementById('profile-btn')?.addEventListener('click', () => {
-      // For now, just navigate to profile section
-      // Could add logout dropdown later
-    });
   },
 
   openLogin() {

@@ -14,13 +14,17 @@ const authLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: (req) => {
-    return req.ip || req.connection.remoteAddress;
+    return req.ip || req.connection.remoteAddress || 'unknown';
+  },
+  skip: (req) => {
+    // Skip rate limiting for trusted proxies
+    return req.ip === '127.0.0.1' || req.ip === '::1';
   }
 });
 
 const apiLimiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
-  max: 100, // 100 requests per minute
+  max: process.env.NODE_ENV === 'production' ? 100 : 500, // Higher limit for development
   message: {
     success: false,
     error: {
@@ -30,7 +34,14 @@ const apiLimiter = rateLimit({
     timestamp: new Date().toISOString()
   },
   standardHeaders: true,
-  legacyHeaders: false
+  legacyHeaders: false,
+  keyGenerator: (req) => {
+    return req.ip || req.connection.remoteAddress || 'unknown';
+  },
+  skip: (req) => {
+    // Skip rate limiting for trusted proxies and local development
+    return req.ip === '127.0.0.1' || req.ip === '::1' || process.env.NODE_ENV !== 'production';
+  }
 });
 
 module.exports = { authLimiter, apiLimiter };

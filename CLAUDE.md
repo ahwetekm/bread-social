@@ -34,14 +34,19 @@ Bu doküman, Claude AI asistanına **Bread Social** projesi hakkında kapsamlı 
 - ✅ Retro piksel-sanat estetiği
 - ✅ Gruvbox Dark renk paleti
 - ✅ Responsive tasarım (desktop → mobile)
-- ✅ Post oluşturma, beğenme, yorum, paylaşım (frontend mock-up)
-- ✅ Kullanıcı profilleri ve takip sistemi (frontend mock-up)
-- ✅ Trending/popüler içerik keşfi (frontend mock-up)
+- ✅ Post oluşturma, beğenme, yorum, paylaşım (frontend + backend)
+- ✅ Kullanıcı profilleri ve takip sistemi (frontend + backend)
+- ✅ Trending/popüler içerik keşfi (feed API)
 - ✅ **Backend API** (Express.js + Turso database)
 - ✅ **Veritabanı entegrasyonu** (Turso - SQLite cloud)
 - ✅ **Authentication sistemi** (JWT + bcrypt, cookie-based)
-- ❌ Post API endpoint'leri henüz implement edilmemiş
-- ❌ Follow sistemi backend'de yok
+- ✅ **Post API** (CRUD operations)
+- ✅ **Like sistemi** (beğeni/beğeni kaldırma)
+- ✅ **Comment sistemi** (yorum ekleme/silme/düzenleme)
+- ✅ **Repost sistemi** (repost/repost kaldırma)
+- ✅ **Follow sistemi** (takip/takipçi sistemi)
+- ✅ **Feed API** (takip edilen kullanıcıların postları)
+- ✅ **User API** (profil görüntüleme/güncelleme)
 - ❌ Real-time özellikler yok
 
 ### Hedef Kullanıcılar
@@ -80,9 +85,11 @@ Bu doküman, Claude AI asistanına **Bread Social** projesi hakkında kapsamlı 
 - ✅ **Security Headers**: Helmet.js
 
 ### Gelecek Entegrasyonlar (Planlanıyor)
-- ❌ **Real-time**: Socket.io
-- ❌ **File Upload**: Cloudinary veya AWS S3
-- ❌ **Email**: SendGrid veya Mailgun
+- ❌ **Real-time**: Socket.io (live notifications, online presence)
+- ❌ **File Upload**: Cloudinary veya AWS S3 (avatar upload, image posts)
+- ❌ **Email**: SendGrid veya Mailgun (welcome emails, password reset)
+- ❌ **Caching**: Redis (frequently accessed data)
+- ❌ **Testing**: Jest, Supertest, Playwright/Cypress
 
 ---
 
@@ -90,19 +97,21 @@ Bu doküman, Claude AI asistanına **Bread Social** projesi hakkında kapsamlı 
 
 ```
 bread-social/
-├── server.js                    # Express server entry point (102 satır)
+├── server.js                    # Express server entry point (101 satır)
 ├── package.json                 # NPM configuration
 ├── package-lock.json            # Dependency lock file
 ├── .gitignore                   # Git ignore patterns
 ├── CLAUDE.md                    # Bu dosya - AI kılavuzu
 ├── README.md                    # Kullanıcı dokümantasyonu (oluşturulacak)
 ├── public/                      # Static frontend files
-│   ├── index.html               # Ana HTML dosyası (739 satır)
+│   ├── index.html               # Ana HTML dosyası
 │   ├── css/
-│   │   └── style.css            # Ana stylesheet (2424 satır)
+│   │   └── style.css            # Ana stylesheet
 │   ├── js/
-│   │   ├── app.js               # Client-side JavaScript (290 satır)
-│   │   └── auth.js              # Authentication client (300 satır)
+│   │   ├── app.js               # Client-side JavaScript
+│   │   ├── auth.js              # Authentication client
+│   │   ├── profile.js           # Profile page JavaScript
+│   │   └── api.js               # API helper functions (276 satır)
 │   └── assets/                  # Statik dosyalar
 │       ├── images/              # (oluşturulacak)
 │       └── icons/               # (oluşturulacak)
@@ -110,16 +119,36 @@ bread-social/
     ├── config/
     │   └── database.js          # Turso database configuration
     ├── controllers/
-    │   └── authController.js    # Authentication controller
+    │   ├── authController.js    # Authentication controller
+    │   ├── postController.js    # Post controller
+    │   ├── userController.js    # User controller
+    │   ├── likeController.js    # Like controller
+    │   ├── commentController.js # Comment controller
+    │   ├── repostController.js  # Repost controller
+    │   ├── followController.js # Follow controller
+    │   └── feedController.js     # Feed controller
     ├── middleware/
     │   ├── auth.js              # JWT authentication middleware
     │   ├── rateLimiter.js       # Rate limiting middleware
     │   └── validation.js        # Input validation middleware
     ├── models/
-    │   └── User.js              # User model
+    │   ├── User.js              # User model
+    │   ├── Post.js              # Post model
+    │   ├── Like.js              # Like model
+    │   ├── Comment.js           # Comment model
+    │   ├── Repost.js            # Repost model
+    │   ├── Follow.js            # Follow model
+    │   └── Feed.js              # Feed model
     ├── routes/
     │   ├── index.js             # Main router
-    │   └── auth.js              # Auth routes
+    │   ├── auth.js              # Auth routes
+    │   ├── posts.js             # Post routes
+    │   ├── users.js             # User routes
+    │   ├── likes.js             # Like routes
+    │   ├── comments.js          # Comment routes
+    │   ├── reposts.js           # Repost routes
+    │   ├── follows.js           # Follow routes
+    │   └── feed.js              # Feed routes
     └── utils/
         ├── hash.js              # Password hashing (bcrypt)
         └── jwt.js               # JWT token utilities
@@ -438,24 +467,74 @@ CORS_ORIGINS=https://yourdomain.com
 **Kısıtlama #119**: RESTful convention'ları takip et:
 
 ### Mevcut API Endpoint'leri (Implement Edilmiş)
+
+#### Authentication
 ```
-GET    /api/v1/health         → API sağlık kontrolü
 POST   /api/v1/auth/register  → Yeni kullanıcı kaydı
 POST   /api/v1/auth/login     → Kullanıcı girişi
 GET    /api/v1/auth/me        → Oturum açmış kullanıcı bilgisi
 POST   /api/v1/auth/logout    → Çıkış yap
 ```
 
-### Planlanmış API Endpoint'leri (Henüz Yok)
+#### Posts
 ```
-GET    /api/v1/posts          → Tüm postlar
-GET    /api/v1/posts/:id      → Tek post
+GET    /api/v1/posts          → Tüm postlar (pagination destekli)
+GET    /api/v1/posts/:id      → Tek post detayı
 POST   /api/v1/posts          → Yeni post oluştur
 PUT    /api/v1/posts/:id      → Post güncelle
 DELETE /api/v1/posts/:id      → Post sil
-GET    /api/v1/users/:username → Kullanıcı profili
-POST   /api/v1/users/:id/follow → Kullanıcıyı takip et
-DELETE /api/v1/users/:id/follow → Takibi bırak
+GET    /api/v1/posts/user/:userId → Kullanıcının postları
+```
+
+#### Users
+```
+GET    /api/v1/users/:username → Kullanıcı profili (username ile)
+GET    /api/v1/users/id/:userId → Kullanıcı profili (ID ile)
+PUT    /api/v1/users/profile   → Profil güncelleme
+GET    /api/v1/users/:userId/posts → Kullanıcının postları
+```
+
+#### Likes
+```
+POST   /api/v1/likes/posts/:postId → Post'u beğen
+DELETE /api/v1/likes/posts/:postId → Beğeniyi kaldır
+GET    /api/v1/likes/posts/:postId → Post'un beğenileri
+GET    /api/v1/likes/posts/:postId/check → Kullanıcının beğeni durumu
+```
+
+#### Comments
+```
+POST   /api/v1/comments/posts/:postId → Yorum ekle
+GET    /api/v1/comments/posts/:postId → Post'un yorumları
+PUT    /api/v1/comments/:commentId → Yorum güncelle
+DELETE /api/v1/comments/:commentId → Yorum sil
+```
+
+#### Reposts
+```
+POST   /api/v1/reposts/posts/:postId → Repost yap
+DELETE /api/v1/reposts/posts/:postId → Repost'u kaldır
+GET    /api/v1/reposts/posts/:postId → Post'un repostları
+GET    /api/v1/reposts/posts/:postId/check → Kullanıcının repost durumu
+```
+
+#### Follows
+```
+POST   /api/v1/follows/:userId → Kullanıcıyı takip et
+DELETE /api/v1/follows/:userId → Takibi bırak
+GET    /api/v1/follows/:userId/followers → Takipçiler
+GET    /api/v1/follows/:userId/following → Takip edilenler
+GET    /api/v1/follows/:userId/check → Takip durumu kontrolü
+```
+
+#### Feed
+```
+GET    /api/v1/feed → Takip edilen kullanıcıların postları (pagination destekli)
+```
+
+#### Health
+```
+GET    /api/v1/health → API sağlık kontrolü
 ```
 
 **Kısıtlama #120**: HTTP status code'ları doğru kullan:
@@ -739,6 +818,8 @@ fix: Resolve login button styling issue
    - JWT authentication sistemi (cookie-based)
    - Rate limiting ve input validation
    - Security headers (Helmet.js)
+   - CORS configuration
+   - Request logging
 
 2. ✅ **Authentication Sistemi**
    - Kullanıcı kaydı (register)
@@ -746,39 +827,95 @@ fix: Resolve login button styling issue
    - Oturum kontrolü (/me endpoint)
    - Çıkış (logout)
    - Frontend auth modals
+   - Cookie-based session management
+
+3. ✅ **Post API**
+   - Post oluşturma (create)
+   - Post listeleme (pagination destekli)
+   - Tek post görüntüleme
+   - Post güncelleme (update)
+   - Post silme (delete)
+   - Kullanıcı postlarını listeleme
+
+4. ✅ **Like Sistemi**
+   - Post beğenme
+   - Beğeniyi kaldırma
+   - Post'un beğenilerini listeleme
+   - Kullanıcının beğeni durumunu kontrol etme
+
+5. ✅ **Comment Sistemi**
+   - Yorum ekleme
+   - Yorumları listeleme
+   - Yorum güncelleme
+   - Yorum silme
+
+6. ✅ **Repost Sistemi**
+   - Repost yapma
+   - Repost'u kaldırma
+   - Post'un repostlarını listeleme
+   - Kullanıcının repost durumunu kontrol etme
+
+7. ✅ **Follow Sistemi**
+   - Kullanıcıyı takip etme
+   - Takibi bırakma
+   - Takipçileri listeleme
+   - Takip edilenleri listeleme
+   - Takip durumunu kontrol etme
+
+8. ✅ **Feed API**
+   - Takip edilen kullanıcıların postlarını listeleme
+   - Pagination desteği
+
+9. ✅ **User API**
+   - Kullanıcı profili görüntüleme (username ile)
+   - Kullanıcı profili görüntüleme (ID ile)
+   - Profil güncelleme
+   - Kullanıcının postlarını listeleme
+
+10. ✅ **Frontend API Client**
+    - API helper functions (api.js)
+    - Tüm endpoint'ler için client-side fonksiyonlar
+    - Error handling
+    - Date formatting utilities
+    - Post HTML generation utilities
 
 ### Öncelikli Geliştirmeler (Sıradaki)
 
-1. **Post API Implementasyonu**
-   - CRUD endpoint'leri (create, read, update, delete)
-   - Feed algoritması
-   - Beğeni sistemi
-   - Yorum sistemi
-
-2. **Kullanıcı Profili API**
-   - Profil güncelleme
-   - Takip/takipçi sistemi
-   - Avatar emoji seçimi
-
-3. **Real-time Özellikler**
+1. **Real-time Özellikler**
    - Socket.io entegrasyonu
    - Live notifications
    - Online user presence
+   - Real-time like/comment/repost updates
 
-4. **File Upload**
+2. **File Upload**
    - Avatar upload
    - Image post support
-   - Cloudinary entegrasyonu
+   - Cloudinary veya AWS S3 entegrasyonu
 
-5. **Testing Suite**
+3. **Testing Suite**
    - Jest unit tests
    - Supertest API tests
-   - Playwright E2E tests
+   - Playwright veya Cypress E2E tests
+   - Test coverage reporting
 
-6. **DevOps**
+4. **DevOps**
    - Docker containerization
    - CI/CD pipeline (GitHub Actions)
    - Deployment automation
+   - Environment-specific configurations
+
+5. **Frontend İyileştirmeleri**
+   - Post oluşturma modal'ı
+   - Comment modal'ı
+   - Profil sayfası
+   - Notifications sistemi
+   - Search özelliği
+
+6. **Email Entegrasyonu**
+   - SendGrid veya Mailgun
+   - Welcome email
+   - Password reset
+   - Notification emails
 
 ### Önerilen Geliştirme Araçları
 
@@ -794,6 +931,20 @@ fix: Resolve login button styling issue
 
 Bu doküman, Bread Social projesinin tüm yönlerini kapsamaktadır. **220+ kısıtlama ve kural** ile projenin tutarlılığı, güvenliği ve performansı garanti altına alınmıştır.
 
+### Proje Durumu (v2.0.0)
+
+Proje şu anda **tam fonksiyonel bir backend API** ile çalışmaktadır. Tüm temel özellikler implement edilmiştir:
+
+- ✅ Authentication sistemi (JWT + cookie-based)
+- ✅ Post API (CRUD operations)
+- ✅ Like sistemi
+- ✅ Comment sistemi
+- ✅ Repost sistemi
+- ✅ Follow sistemi
+- ✅ Feed API
+- ✅ User API
+- ✅ Frontend API client
+
 ### Claude AI için Özel Talimatlar
 
 - **Tüm kısıtlamalara uygun kod yaz**
@@ -803,6 +954,7 @@ Bu doküman, Bread Social projesinin tüm yönlerini kapsamaktadır. **220+ kıs
 - **Güvenlik ve performansa dikkat et**
 - **Accessibility standartlarını uygula**
 - **Türkçe dil desteğini koru**
+- **Mevcut API endpoint'lerini kullan, yeni endpoint eklerken RESTful convention'ları takip et**
 
 **Eğer bir kısıtlamayı ihlal etmen gerekiyorsa:**
 1. Kullanıcıya bildir
@@ -811,8 +963,8 @@ Bu doküman, Bread Social projesinin tüm yönlerini kapsamaktadır. **220+ kıs
 
 ---
 
-**Son Güncelleme**: 2026-01-22
-**Versiyon**: 1.1.0
+**Son Güncelleme**: 2026-01-26
+**Versiyon**: 2.0.0
 **Durum**: Aktif
 **Yazar**: Bread Social Development Team
 
