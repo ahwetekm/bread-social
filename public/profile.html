@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Bread Social</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <header class="top-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" class="logo-link">
+                    <span class="logo-text">🍞 BREAD SOCIAL</span>
+                </a>
+            </div>
+            <div class="nav-search">
+                <input type="text" placeholder="Ara..." class="search-input" id="search-input">
+            </div>
+            <div class="nav-actions">
+                <!-- Authenticated user actions -->
+                <div class="auth-actions authenticated">
+                    <button class="nav-btn" id="notifications-btn">Bildirimler</button>
+                </div>
+                <!-- Guest actions -->
+                <div class="auth-actions guest">
+                    <button class="nav-btn nav-btn-secondary" id="login-btn">Giriş Yap</button>
+                    <button class="nav-btn nav-btn-primary" id="register-btn">Kayıt Ol</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <nav class="nav-menu">
+                <a href="/" class="nav-item">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-label">Ana Sayfa</span>
+                </a>
+                <a href="/#explore" class="nav-item">
+                    <span class="nav-icon">🔍</span>
+                    <span class="nav-label">Keşfet</span>
+                </a>
+                <a href="/#messages" class="nav-item" data-auth-required="true">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-label">Mesajlar</span>
+                </a>
+                <a href="/#profile" class="nav-item" data-auth-required="true">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-label">Profil</span>
+                </a>
+            </nav>
+            <button class="post-btn" data-auth-required="true">+ YENİ POST</button>
+        </aside>
+
+        <!-- Profile Section -->
+        <section class="feed">
+            <!-- Back Button -->
+            <div class="profile-back">
+                <button class="back-btn" onclick="history.back()">← Geri</button>
+                <div class="profile-back-info">
+                    <div class="profile-back-name" id="profile-back-name">Profil</div>
+                    <div class="profile-back-posts" id="profile-back-posts">0 gönderi</div>
+                </div>
+            </div>
+
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-cover"></div>
+                <div class="profile-info">
+                    <div class="profile-avatar-large" id="profile-avatar">🧑</div>
+                    <div class="profile-meta">
+                        <div class="profile-name-section">
+                            <h1 class="profile-display-name" id="profile-display-name">Yükleniyor...</h1>
+                            <div class="profile-username" id="profile-username">@</div>
+                        </div>
+                        <div class="profile-actions">
+                            <button class="profile-follow-btn" id="profile-follow-btn" style="display: none;">Takip Et</button>
+                            <button class="profile-edit-btn" id="profile-edit-btn" style="display: none;">Profili Düzenle</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-bio" id="profile-bio">
+                    <p>Yükleniyor...</p>
+                </div>
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <span class="stat-value" id="profile-posts-count">0</span>
+                        <span class="stat-label">Gönderi</span>
+                    </div>
+                    <div class="profile-stat">
+                        <span class="stat-value" id="profile-followers-count">0</span>
+                        <span class="stat-label">Takipçi</span>
+                    </div>
+                    <div class="profile-stat">
+                        <span class="stat-value" id="profile-following-count">0</span>
+                        <span class="stat-label">Takip</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Tabs -->
+            <div class="profile-tabs">
+                <button class="profile-tab active" data-tab="posts">📝 Gönderiler</button>
+                <button class="profile-tab" data-tab="replies">💬 Yanıtlar</button>
+                <button class="profile-tab" data-tab="media">🖼️ Medya</button>
+                <button class="profile-tab" data-tab="likes">❤️ Beğeniler</button>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="profile-content">
+                <!-- Posts Tab -->
+                <div class="profile-tab-content active" id="posts-tab">
+                    <div class="posts" id="profile-posts">
+                        <div class="loading">Yükleniyor...</div>
+                    </div>
+                </div>
+
+                <!-- Replies Tab -->
+                <div class="profile-tab-content" id="replies-tab">
+                    <div class="empty-state">
+                        <div class="empty-icon">💬</div>
+                        <div class="empty-title">Henüz yanıt yok</div>
+                        <div class="empty-description">Bu kullanıcı henüz hiçbir gönderiye yanıt vermemiş.</div>
+                    </div>
+                </div>
+
+                <!-- Media Tab -->
+                <div class="profile-tab-content" id="media-tab">
+                    <div class="empty-state">
+                        <div class="empty-icon">🖼️</div>
+                        <div class="empty-title">Henüz medya yok</div>
+                        <div class="empty-description">Bu kullanıcı henüz fotoğraf veya video paylaşmamış.</div>
+                    </div>
+                </div>
+
+                <!-- Likes Tab -->
+                <div class="profile-tab-content" id="likes-tab">
+                    <div class="empty-state">
+                        <div class="empty-icon">❤️</div>
+                        <div class="empty-title">Henüz beğeni yok</div>
+                        <div class="empty-description">Bu kullanıcının beğendiği gönderiler burada görünecek.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Trends Section -->
+            <div class="sidebar-card">
+                <div class="sidebar-header">Trendler</div>
+                <div class="trend-item">
+                    <div class="trend-category">Teknoloji</div>
+                    <div class="trend-topic">#GruvboxTheme</div>
+                    <div class="trend-stats">2.4K tweet</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-category">Yazılım</div>
+                    <div class="trend-topic">#RetroDesign</div>
+                    <div class="trend-stats">1.8K tweet</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-category">Web Dev</div>
+                    <div class="trend-topic">#PixelArt</div>
+                    <div class="trend-stats">3.2K tweet</div>
+                </div>
+            </div>
+
+            <!-- Who to Follow -->
+            <div class="sidebar-card">
+                <div class="sidebar-header">Takip Et</div>
+                <div class="follow-item">
+                    <div class="follow-avatar">🎨</div>
+                    <div class="follow-info">
+                        <div class="follow-name">Design Studio</div>
+                        <div class="follow-handle">@designstudio</div>
+                    </div>
+                    <button class="follow-btn">Takip Et</button>
+                </div>
+                <div class="follow-item">
+                    <div class="follow-avatar">💻</div>
+                    <div class="follow-info">
+                        <div class="follow-name">Dev Community</div>
+                        <div class="follow-handle">@devcommunity</div>
+                    </div>
+                    <button class="follow-btn">Takip Et</button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Modals (same as index.html) -->
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content auth-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">🔐 GİRİŞ YAP</h2>
+                <button class="modal-close login-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-identifier" class="form-label">E-posta veya Kullanıcı Adı</label>
+                        <input type="text" id="login-identifier" name="identifier" class="form-input" placeholder="ornek@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password" class="form-label">Şifre</label>
+                        <input type="password" id="login-password" name="password" class="form-input" placeholder="********" required>
+                    </div>
+                    <div class="form-error" id="login-error"></div>
+                    <button type="submit" class="form-submit-btn">GİRİŞ YAP</button>
+                </form>
+                <div class="auth-switch">
+                    Hesabın yok mu? <a href="#" id="switch-to-register">Kayıt ol</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="register-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content auth-modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📝 KAYIT OL</h2>
+                <button class="modal-close register-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="register-username" class="form-label">Kullanıcı Adı</label>
+                        <input type="text" id="register-username" name="username" class="form-input" placeholder="kullanici_adi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email" class="form-label">E-posta</label>
+                        <input type="email" id="register-email" name="email" class="form-input" placeholder="ornek@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password" class="form-label">Şifre</label>
+                        <input type="password" id="register-password" name="password" class="form-input" placeholder="********" required>
+                    </div>
+                    <div class="form-error" id="register-error"></div>
+                    <button type="submit" class="form-submit-btn">KAYIT OL</button>
+                </form>
+                <div class="auth-switch">
+                    Zaten hesabın var mı? <a href="#" id="switch-to-login">Giriş yap</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/user-profile.js"></script>
+</body>
+</html>

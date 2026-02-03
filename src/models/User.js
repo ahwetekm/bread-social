@@ -115,9 +115,9 @@ const User = {
     const postsCount = await Post.countByUserId(userId);
 
     return {
-      posts: postsCount,
-      followers: followersCount,
-      following: followingCount
+      posts_count: postsCount,
+      followers_count: followersCount,
+      following_count: followingCount
     };
   },
 

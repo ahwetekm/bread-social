@@ -346,8 +346,12 @@ function createPostHTML(post) {
       <div class="post-header">
         <div class="post-avatar">${post.avatar_emoji || '🧑'}</div>
         <div class="post-author">
-          <div class="post-name">${displayName}</div>
-          <div class="post-handle">@${post.username} · ${timeAgo}</div>
+          <div class="post-name">
+            <a href="/profile.html?username=${post.username}" class="user-link">${displayName}</a>
+          </div>
+          <div class="post-handle">
+            <a href="/profile.html?username=${post.username}" class="user-link">@${post.username}</a> · ${timeAgo}
+          </div>
         </div>
         ${isOwner ? `
           <div class="post-menu">

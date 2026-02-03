@@ -13,12 +13,9 @@ const authLimiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
-  keyGenerator: (req) => {
-    return req.ip || req.connection.remoteAddress || 'unknown';
-  },
   skip: (req) => {
-    // Skip rate limiting for trusted proxies
-    return req.ip === '127.0.0.1' || req.ip === '::1';
+    // Skip rate limiting for local development
+    return process.env.NODE_ENV !== 'production';
   }
 });
 
@@ -35,12 +32,9 @@ const apiLimiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
-  keyGenerator: (req) => {
-    return req.ip || req.connection.remoteAddress || 'unknown';
-  },
   skip: (req) => {
-    // Skip rate limiting for trusted proxies and local development
-    return req.ip === '127.0.0.1' || req.ip === '::1' || process.env.NODE_ENV !== 'production';
+    // Skip rate limiting for local development
+    return process.env.NODE_ENV !== 'production';
   }
 });
 

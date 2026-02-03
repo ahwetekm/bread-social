@@ -817,8 +817,12 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="comment-avatar">${comment.avatar_emoji || '🧑'}</div>
         <div class="comment-content-wrapper">
           <div class="comment-header">
-            <span class="comment-author">${displayName}</span>
-            <span class="comment-time">@${comment.username} · ${timeAgo}</span>
+            <span class="comment-author">
+              <a href="/profile.html?username=${comment.username}" class="user-link">${displayName}</a>
+            </span>
+            <span class="comment-time">
+              <a href="/profile.html?username=${comment.username}" class="user-link">@${comment.username}</a> · ${timeAgo}
+            </span>
           </div>
           <div class="comment-text">${comment.content}</div>
         </div>
@@ -1211,12 +1215,16 @@ document.addEventListener('DOMContentLoaded', function() {
       userElement.innerHTML = `
         <div class="user-result-avatar">${user.avatar_emoji || '🧑'}</div>
         <div class="user-result-info">
-          <div class="user-result-name">${user.display_name || user.username}</div>
-          <div class="user-result-username">@${user.username}</div>
+          <div class="user-result-name">
+            <a href="/profile.html?username=${user.username}" class="user-link">${user.display_name || user.username}</a>
+          </div>
+          <div class="user-result-username">
+            <a href="/profile.html?username=${user.username}" class="user-link">@${user.username}</a>
+          </div>
           ${user.bio ? `<div class="user-result-bio">${user.bio}</div>` : ''}
         </div>
         <div class="user-result-actions">
-          <button class="action-btn" onclick="window.location.href='#profile-${user.id}'">Profil</button>
+          <a href="/profile.html?username=${user.username}" class="action-btn">Profil</a>
         </div>
       `;
       searchResults.appendChild(userElement);
